@@ -109,7 +109,7 @@ else
 	../matlab/bin/run_spm12.sh "${mcr_dir}" function foodpics_firstlevel \
 		fmri1_nii "${out_dir}"/fmri1.nii \
 		confounds1 "${out_dir}"/confounds1.tsv \
-		multi_conds1 "${out_dir}"/onsets_foodpics1.mat \ 
+		multi_conds1 "${out_dir}"/onsets_foodpics1.mat \
 		tr "${tr}" \
 		n_vols "${n_vols}" \
 		fwhm "${fwhm}" \
