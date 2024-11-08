@@ -20,10 +20,11 @@ end
 
 %% Study specific variables to specify data folders and SPM settings
 task_id='foodpics';
-study_dir='/home/data/images/adak';								        % main study directory
-bids_dir=fullfile(study_dir,'data','bids_data');					    % bids data directory
-preproc_dir=fullfile(bids_dir, 'derivatives','fmriprep_3mm');		    % directory with preprocessed data
-output_dir=fullfile(bids_dir,'derivatives',['adak_' task_id '_kc']);    % analysis output directory for fmriprep 3mm data
+study_dir='/home/data/images/adak';								                % main study directory
+onset_dir=fullfile(study_dir, 'code', ['adak_' task_id '_kc'],'matlab','src');  % directory with SPM onsets - same for all subjects in this study
+bids_dir=fullfile(study_dir,'data','bids_data');					            % bids data directory
+preproc_dir=fullfile(bids_dir, 'derivatives','fmriprep_3mm');		            % directory with preprocessed data
+output_dir=fullfile(bids_dir,'derivatives',['adak_' task_id '_kc']);            % analysis output directory for fmriprep 3mm data
 
 n_vols='172';                           % each run should contain 172 volumes
 tr='2';                                 % repetition time = 2s
@@ -40,7 +41,7 @@ disp(['output_space: ' output_space]);
 out_dir=fullfile(output_dir, subject_id, session_id, [task_id '_firstlevel']);
 if not(isfolder(out_dir))
     [status, msg] = mkdir(out_dir);
-    if status == 1 
+    if status == 0 
         error(msg);
     end
 end
@@ -51,22 +52,22 @@ for r = 1:length(run_list)
     % Set file paths
     run_number = num2str(run_list(r));
 
-    multi_conds=fullfile(study_dir, 'code', ['adak_' task_id '_test'],'matlab','src',['onsets_' task_id '_run-0' run_number '.mat']);	% onsets for foodpics run
+    multi_conds=fullfile(onset_dir,['onsets_' task_id '_run-0' run_number '.mat']);	% onsets for foodpics run
 
     fmri=fullfile(preproc_dir,subject_id,session_id,'func', [subject_id '_' session_id '_' 'task-' task_id '_' 'run-0' run_number '_' 'space-' output_space '_' 'desc-preproc_bold.nii.gz']);
     confounds=fullfile(preproc_dir,subject_id,session_id,'func', [subject_id '_' session_id '_' 'task-' task_id '_' 'run-0' run_number '_' 'desc-confounds_timeseries.tsv']);    
 
     % Copy input files to out_dir
     [status, msg] = copyfile(fmri, out_dir);
-    if status == 1 
+    if status == 0 
         error(msg);
     end
     [status, msg] = copyfile(confounds, out_dir);
-    if status == 1 
+    if status == 0 
         error(msg);
     end
     [status, msg] = copyfile(multi_conds, out_dir);
-    if status == 1 
+    if status == 0 
         error(msg);
     end
 
