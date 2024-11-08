@@ -69,7 +69,6 @@ matlabbatch{1}.spm.stats.fmri_spec.timing.fmri_t = 16;
 matlabbatch{1}.spm.stats.fmri_spec.timing.fmri_t0 = 8;
 
 % setup fmri1
-% matlabbatch{1}.spm.stats.fmri_spec.sess(1).scans = cellstr(spm_select('ExtFPList', fmri1_path, ['^s' fmri1_name fmri1_ext],1:n_vols));
 matlabbatch{1}.spm.stats.fmri_spec.sess(1).scans = cellstr(fullfile(fmri1_path, ['s' fmri1_name fmri1_ext]));
 matlabbatch{1}.spm.stats.fmri_spec.sess(1).cond = struct('name', {}, 'onset', {}, 'duration', {}, 'tmod', {}, 'pmod', {}, 'orth', {});
 matlabbatch{1}.spm.stats.fmri_spec.sess(1).multi = {inp.multi_conds1};
@@ -79,7 +78,6 @@ matlabbatch{1}.spm.stats.fmri_spec.sess(1).hpf = 128;
 
 % setup fmri2
 if multi_fmri   
-%     matlabbatch{1}.spm.stats.fmri_spec.sess(2).scans = cellstr(spm_select('ExtFPList', fmri2_path, ['^s' fmri2_name fmri2_ext],1:n_vols));
     matlabbatch{1}.spm.stats.fmri_spec.sess(2).scans = cellstr(fullfile(fmri2_path, ['s' fmri2_name fmri2_ext]));
     matlabbatch{1}.spm.stats.fmri_spec.sess(2).cond = struct('name', {}, 'onset', {}, 'duration', {}, 'tmod', {}, 'pmod', {}, 'orth', {});
     matlabbatch{1}.spm.stats.fmri_spec.sess(2).multi = {inp.multi_conds2};
