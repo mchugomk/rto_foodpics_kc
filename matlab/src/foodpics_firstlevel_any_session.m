@@ -7,6 +7,12 @@ function foodpics_firstlevel_any_session(subject_id, session_id, run_list)
 %   to process both runs: [1 2]
 %   to process only run 1: [1]
 %   to process only run 2: [2]
+%
+% This script runs a pipeline to analyze the ADAK foodpics data
+% based on parameters determined by KC. The pipeline includes:
+% Changes from adak_foodpics_spm:
+% - Saves residuals if needed for AFNI analysis
+% - Saves output in folder 'adak_foodpics_kc'
 
 if nargin ~= 3 
     error('Must specify subject_id, session_id and run_list');
@@ -14,10 +20,10 @@ end
 
 %% Study specific variables to specify data folders and SPM settings
 task_id='foodpics';
-study_dir='/home/data/images/adak';								    % main study directory
-bids_dir=fullfile(study_dir,'data','bids_data');					% bids data directory
-preproc_dir=fullfile(bids_dir, 'derivatives','fmriprep_3mm');		% directory with preprocessed data
-output_dir=fullfile(bids_dir,'derivatives',['adak_' task_id '_spm']);	    % analysis output directory for fmriprep 3mm data
+study_dir='/home/data/images/adak';								        % main study directory
+bids_dir=fullfile(study_dir,'data','bids_data');					    % bids data directory
+preproc_dir=fullfile(bids_dir, 'derivatives','fmriprep_3mm');		    % directory with preprocessed data
+output_dir=fullfile(bids_dir,'derivatives',['adak_' task_id '_kc']);    % analysis output directory for fmriprep 3mm data
 
 n_vols='172';                           % each run should contain 172 volumes
 tr='2';                                 % repetition time = 2s
